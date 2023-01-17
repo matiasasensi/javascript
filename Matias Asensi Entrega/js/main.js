@@ -4,12 +4,12 @@ class Auto {
         this.precio = precio;
     }
 }
-const Autos = [
+/*const Autos = [
     {nombre: 'KIA', precio: 15000},
     {nombre: 'NISSAN', precio: 22000},
 ]
 
-
+*/
 
 /*let resultado = Autos.find((el) => el.nombre === "KIA")
 let resultado2 = Autos.find((el) => el.nombre === "NISSAN")
@@ -24,7 +24,7 @@ const auto2 = new Auto ("NISSAN", 8000);
 
 const auto3 = new Auto ("HYUNDAI", 18000);
 
-
+/*
 //let Autoingresado = prompt("¿qué auto desea comprar?").toUpperCase();
 //while(Autoingresado != "ESC" ){
     switch(Autoingresado) {
