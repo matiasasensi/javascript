@@ -10,7 +10,12 @@ class Auto {
 ]
 
 */
-
+/*var n=1;
+function test() {
+  console.log(n);
+  n=n+1;
+}
+setInterval(test, 1000);
 /*let resultado = Autos.find((el) => el.nombre === "KIA")
 let resultado2 = Autos.find((el) => el.nombre === "NISSAN")
 
@@ -94,7 +99,9 @@ function CalculoCompuestoKia(){
     for (let i=0; i<3; i++) {
         
         precioactual*=1.21;
-        alert("El precio durante el mes " + mess + " sería "+ precioactual);
+        //alert("El precio durante el mes " + mess + " sería "+ precioactual);
+        tasa=document.getElementById("tasa");
+        tasa.innerHTML=("Tasa de interés: " + "durante: " + mess + precioactual);
         mess++;
         preciototal += precioactual;
         Cuotas1[cuotaactual].cuota += precioactual;
@@ -162,29 +169,29 @@ for (const producto of Cuotas3) {
     console.log(producto.mes);
     console.log(producto.cuota);
 }*/
-let Autodeahora = document.getElementById("foto-auto").value;
-let kiabool = true;
-let hyundaibool = false;
-let nissanbool = false;
+let Autodeahora = "KIA"
+
 function respuestaClickHyundai(){
     picture = document.getElementById("foto-auto");
     picture.src = "./media/RT_V_16c5b741d6c74c83b6a0c4da4dc9657e.jpg";
     document.getElementById("nombre-auto").innerHTML = "Hyundai Ioniq";
     document.getElementById("costs").innerHTML = "Coste del vehiculo: " + auto3.precio;
-    nissanbool = false;
-    hyundaibool = true;
-    kiabool = false;
-    alert(Autodeahora);
+    
+    Autodeahora="HYUNDAI"
+    container=document.getElementById("para-1");
+    container.remove();
+   
   }
   function respuestaClickNissan(){
     picture = document.getElementById("foto-auto");
     picture.src = "./media/Nissan_370Z_Nismo_frt.jpg";
     document.getElementById("nombre-auto").innerHTML = "Nissan 370z";
     document.getElementById("costs").innerHTML = "Coste del vehiculo: " + auto2.precio;
-    nissanbool = true;
-    hyundaibool = false;
-    kiabool = false;
-    alert(Autodeahora);
+    
+    Autodeahora = "NISSAN"
+    container=document.getElementById("para-1");
+    container.remove();
+    
   }
   function respuestaClickKia(){
     picture = document.getElementById("foto-auto");
@@ -192,29 +199,194 @@ function respuestaClickHyundai(){
     titulo = document.getElementById("nombre-auto");
     titulo.innerHTML = "Kia Stinger";
     document.getElementById("costs").innerHTML = "Coste del vehiculo: " + auto1.precio;
-    nissanbool = false;
-    hyundaibool = false;
-    kiabool = true;
-    alert(Autodeahora);
+    
+    Autodeahora="KIA"
+    container=document.getElementById("para-1");
+    container.remove();
+   
   }
-  
+  let counter = 0
+    const Cuotas2=[{
+        mes: 1, cuota: 0},
+        { mes: 2, cuota: 0},
+        { mes: 3, cuota: 0},
+        { mes: 4, cuota: 0},
+        { mes: 5, cuota: 0},
+        { mes: 6, cuota: 0}
+    
+    ]; 
+
+    let precioactual=auto2.precio;
+    let mess = 0;
+    let preciototal = auto2.precio;
+    let cuotaactual=0;
+
  function CalcularInteres(){
     
+
     
-    if (kiabool==true){
-        alert("usted desea un kia");
-        alert("El precio durante el mes 1 es "+ auto1.precio);
-        CalculoCompuestoKia();
-    } else
-    if (nissanbool==true){
-        alert("usted desea un nissan");
-        alert("El precio durante el mes 1 es "+ auto2.precio);
-        CalculoCompuestoNissan();
+    {
+
+    Swal.fire({
+        title: '¡Estupendo!',
+        text: 'Su interés esta siendo calculado ahora mismo',
+        icon: 'success',
+        confirmButtonText: '¡Veamos!'
+})
+}
+    
+    if (Autodeahora=="KIA"){
+        setTimeout(()=> {
+            Swal.fire({
+                title: '¡Estupendo!',
+                text: 'El precio de su auto es ' + preciototal.toFixed(2),
+                icon: 'success',
+                confirmButtonText: '¡Veamos!'
+        })}, 9000)
+        
+       //const timeoutt = setTimeout(() => {alert("en total este costaría " + preciototal),7000})
+        let precioactual=auto1.precio;
+    let mess = 0;
+    let preciototal = auto1.precio;
+    let cuotaactual=0;
+        //alert("usted desea un kia");
+        tasa=document.getElementById("contenedor");
+        let container = document.createElement("div");
+        container.setAttribute("id","para-1");
+        tasa.appendChild (container);
+        
+       // let botonete = document.createElement("button")
+       // botonete.innerHTML="<button href='#' class='btn btn-primary w-100' id='botonetee' onclick='CalculoCompuestoKia()'>Calcular Interés</button>";
+       // tasa.appendChild (botonete);
+       const interval = setInterval(() => {
+    counter++
+    console.log("Counter: ", counter)
+
+    
+    //for (let i=0; i<3; i++)
+     
+        
+        precioactual*=1.21;
+        console.log("El precio durante el mes " + mess + " sería "+ precioactual);
+        mess++;
+        preciototal += precioactual;
+        Cuotas2[cuotaactual].cuota += precioactual;
+        cuotaactual++;
+
+        let parrafo = document.createElement("p");
+    // Insertar HTML interno
+    parrafo.innerHTML = "<h2>El precio durante el mes " + mess + " sería " + precioactual.toFixed(2) + "</h2>"; 
+    // Añadir el nodo Element como hijo de body
+    container.appendChild (parrafo);
+    
+
+    if (mess >= 8) {
+        clearInterval(interval)
+        console.log("Se removió el intervalo")
     }
-    if (hyundaibool==true){
-        alert("usted desea un hyundai");
-        alert("El precio durante el mes 1 es "+ auto2.precio);
-        CalculoCompuestoNissan();
+}, 1000)
+
+
+        
+        //alert("El precio durante el mes 1 es "+ auto1.precio);
+        //CalculoCompuestoKia();
+    } else
+    if (Autodeahora == "NISSAN"){
+        //alert("usted desea un nissan");
+        let precioactual=auto2.precio;
+    let mess = 0;
+    let preciototal = auto2.precio;
+    let cuotaactual=0;
+    setTimeout(()=> {
+        Swal.fire({
+            title: '¡Estupendo!',
+            text: 'El precio de su auto es ' + preciototal.toFixed(2),
+            icon: 'success',
+            confirmButtonText: '¡Veamos!'
+    })}, 9000)
+        //alert("usted desea un kia");
+        tasa=document.getElementById("contenedor");
+        let container = document.createElement("div");
+        container.setAttribute("id","para-1");
+        tasa.appendChild (container);
+       // let botonete = document.createElement("button")
+       // botonete.innerHTML="<button href='#' class='btn btn-primary w-100' id='botonetee' onclick='CalculoCompuestoKia()'>Calcular Interés</button>";
+       // tasa.appendChild (botonete);
+       const interval = setInterval(() => {
+    counter++
+    console.log("Counter: ", counter)
+
+    
+    //for (let i=0; i<3; i++)
+     
+        
+        precioactual*=1.21;
+        console.log("El precio durante el mes " + mess + " sería "+ precioactual);
+        mess++;
+        preciototal += precioactual;
+        Cuotas2[cuotaactual].cuota += precioactual;
+        cuotaactual++;
+
+        let parrafo = document.createElement("p");
+    // Insertar HTML interno
+    parrafo.innerHTML = "<h2>El precio durante el mes " + mess + " sería " + precioactual.toFixed(2) + "</h2>"; 
+    // Añadir el nodo Element como hijo de body
+    container.appendChild (parrafo);
+    
+
+    if (mess >= 8) {
+        clearInterval(interval)
+        console.log("Se removió el intervalo")
+    }
+}, 1000)
+    }
+    if (Autodeahora=="HYUNDAI"){
+        let precioactual=auto3.precio;
+        let mess = 0;
+        let preciototal = auto3.precio;
+        let cuotaactual=0;
+        setTimeout(()=> {
+            Swal.fire({
+                title: '¡Estupendo!',
+                text: 'El precio de su auto es ' + preciototal.toFixed(2),
+                icon: 'success',
+                confirmButtonText: '¡Veamos!'
+        })}, 9000)
+            //alert("usted desea un kia");
+            tasa=document.getElementById("contenedor");
+            let container = document.createElement("div");
+            container.setAttribute("id","para-1");
+            tasa.appendChild (container);
+           // let botonete = document.createElement("button")
+           // botonete.innerHTML="<button href='#' class='btn btn-primary w-100' id='botonetee' onclick='CalculoCompuestoKia()'>Calcular Interés</button>";
+           // tasa.appendChild (botonete);
+           const interval = setInterval(() => {
+        counter++
+        console.log("Counter: ", counter)
+    
+        
+        //for (let i=0; i<3; i++)
+         
+            
+            precioactual*=1.21;
+            console.log("El precio durante el mes " + mess + " sería "+ precioactual);
+            mess++;
+            preciototal += precioactual;
+            Cuotas2[cuotaactual].cuota += precioactual;
+            cuotaactual++;
+    
+            let parrafo = document.createElement("p");
+        // Insertar HTML interno
+        parrafo.innerHTML = "<h2>El precio durante el mes " + mess + " sería " + precioactual.toFixed(2) + "</h2>"; 
+        // Añadir el nodo Element como hijo de body
+        container.appendChild (parrafo);
+        
+    
+        if (mess >= 8) {
+            clearInterval(interval)
+            console.log("Se removió el intervalo")
+        }
+    }, 1000)
     }
  }
 
@@ -224,3 +396,53 @@ function respuestaClickHyundai(){
       function respuestaClick(){
         alert("Respuesta evento");
       }*/
+
+     /* setInterval(() => {
+        console.log("Tic")
+        let parrafo = document.createElement("p");
+        // Insertar HTML interno
+        parrafo.innerHTML = "<h2>¡Hola Coder!</h2>"; 
+        // Añadir el nodo Element como hijo de body
+        document.body.append(parrafo);
+    }, 1000) */
+    
+
+/*const interval = setInterval(() => {
+    counter++
+    console.log("Counter: ", counter)
+
+    
+    //for (let i=0; i<3; i++)
+     
+        
+        precioactual*=1.21;
+        console.log("El precio durante el mes " + mess + " sería "+ precioactual);
+        mess++;
+        preciototal += precioactual;
+        Cuotas2[cuotaactual].cuota += precioactual;
+        cuotaactual++;
+
+        let parrafo = document.createElement("p");
+    // Insertar HTML interno
+    parrafo.innerHTML = "<h2>El precio durante el mes " + mess + " sería " + precioactual.toFixed(2) + "</h2>"; 
+    // Añadir el nodo Element como hijo de body
+    document.body.append(parrafo);
+    
+
+    if (mess >= 8) {
+        clearInterval(interval)
+        console.log("Se removió el intervalo")
+    }
+}, 1000)
+    
+
+      const btnnn = document.querySelector('#myBtn')
+btnnn.addEventListener('click', () => {
+
+    Swal.fire({
+        title: '¡Estupendo!',
+        text: 'Su interés esta siendo calculado ahora mismo',
+        icon: 'success',
+        confirmButtonText: '¡Veamos!'
+})
+})*/
